@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center w-full">
-      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative pb-16">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">
             AI Model Pricing Calculator
@@ -154,6 +154,18 @@ export default function App() {
           </div>
         </div>
       </div>
+      <footer className="fixed bottom-0 w-full bg-white shadow-md py-3">
+        <div className="text-center text-sm text-gray-600">
+          <a 
+            href="https://syptools.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hover:text-primary-600 transition-colors duration-200"
+          >
+            syptools.com
+          </a>
+        </div>
+      </footer>
     </div>
   )
 }
