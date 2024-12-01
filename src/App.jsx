@@ -45,82 +45,85 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-4xl">
+        <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             AI Model Pricing Calculator
           </h1>
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-gray-600">
             Compare costs across different AI model providers
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Input Section */}
-          <div className="card col-span-1">
-            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <CpuChipIcon className="h-6 w-6 text-primary-500" />
-              Input Parameters
-            </h2>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Input Tokens
-                </label>
-                <input
-                  type="number"
-                  value={inputTokens}
-                  onChange={(e) => setInputTokens(Number(e.target.value))}
-                  className="input"
-                  min="0"
-                />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left Column: Input Parameters + Provider Selection */}
+          <div className="space-y-6">
+            {/* Input Parameters */}
+            <div className="card">
+              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <CpuChipIcon className="h-6 w-6 text-primary-500" />
+                Input Parameters
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Input Tokens
+                  </label>
+                  <input
+                    type="number"
+                    value={inputTokens}
+                    onChange={(e) => setInputTokens(Number(e.target.value))}
+                    className="input"
+                    min="0"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Output Tokens
+                  </label>
+                  <input
+                    type="number"
+                    value={outputTokens}
+                    onChange={(e) => setOutputTokens(Number(e.target.value))}
+                    className="input"
+                    min="0"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Output Tokens
-                </label>
-                <input
-                  type="number"
-                  value={outputTokens}
-                  onChange={(e) => setOutputTokens(Number(e.target.value))}
-                  className="input"
-                  min="0"
-                />
-              </div>
+            </div>
+
+            {/* Provider Selection */}
+            <div className="card">
+              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <CurrencyDollarIcon className="h-6 w-6 text-primary-500" />
+                Provider Selection
+              </h2>
+              <Tab.Group>
+                <Tab.List className="flex space-x-1 rounded-xl bg-primary-100 p-1">
+                  {providers.map((provider) => (
+                    <Tab
+                      key={provider.name}
+                      className={({ selected }) =>
+                        classNames(
+                          'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                          'ring-white ring-opacity-60 ring-offset-2 ring-offset-primary-400 focus:outline-none focus:ring-2',
+                          selected
+                            ? 'bg-white shadow text-primary-700'
+                            : 'text-primary-600 hover:bg-white/[0.12] hover:text-primary-700'
+                        )
+                      }
+                      onClick={() => setSelectedProvider(provider)}
+                    >
+                      {provider.name}
+                    </Tab>
+                  ))}
+                </Tab.List>
+              </Tab.Group>
             </div>
           </div>
 
-          {/* Provider Selection */}
-          <div className="card col-span-1">
-            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <CurrencyDollarIcon className="h-6 w-6 text-primary-500" />
-              Provider Selection
-            </h2>
-            <Tab.Group>
-              <Tab.List className="flex space-x-1 rounded-xl bg-primary-100 p-1">
-                {providers.map((provider) => (
-                  <Tab
-                    key={provider.name}
-                    className={({ selected }) =>
-                      classNames(
-                        'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
-                        'ring-white ring-opacity-60 ring-offset-2 ring-offset-primary-400 focus:outline-none focus:ring-2',
-                        selected
-                          ? 'bg-white shadow text-primary-700'
-                          : 'text-primary-600 hover:bg-white/[0.12] hover:text-primary-700'
-                      )
-                    }
-                    onClick={() => setSelectedProvider(provider)}
-                  >
-                    {provider.name}
-                  </Tab>
-                ))}
-              </Tab.List>
-            </Tab.Group>
-          </div>
-
-          {/* Results */}
-          <div className="card col-span-1">
+          {/* Right Column: Results */}
+          <div className="card h-fit">
             <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
               <ClockIcon className="h-6 w-6 text-primary-500" />
               Cost Estimation
