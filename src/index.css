@@ -72,6 +72,10 @@ button:focus-visible {
 @tailwind utilities;
 
 @layer base {
+  html, body, #root {
+    @apply w-full h-full m-0 p-0;
+  }
+  
   body {
     @apply bg-gray-50 text-gray-900 antialiased;
   }
@@ -88,6 +92,6 @@ button:focus-visible {
     @apply w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none;
   }
   .card {
-    @apply bg-white rounded-lg shadow-md p-5;
+    @apply bg-white rounded-lg shadow-md p-5 w-full;
   }
 }
